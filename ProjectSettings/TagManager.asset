@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - character
+  - interactable
+  - bottom
   - 
   - 
   - 
@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bottom
+    uniqueID: 3065911505
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 2201799143
+    locked: 0
+  - name: ObjectsFront
+    uniqueID: 747352295
+    locked: 0
+  - name: Foreground
+    uniqueID: 4065326463
     locked: 0
