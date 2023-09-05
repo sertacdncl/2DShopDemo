@@ -3,7 +3,7 @@ guid: 9c5b78ac5956a614699cd690050a877c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,12 +20,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -64,8 +63,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -77,7 +74,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -90,7 +86,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -103,7 +98,18 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1132,56 +1138,57 @@ TextureImporter:
     - texture: {fileID: 2800000, guid: 02b833c22c1d58047bd35f3d42da9673, type: 3}
       name: _MaskTex
     nameFileIdTable:
-      dirt_tiles_v1_0: -1958977238
-      dirt_tiles_v1_1: 1512497509
-      dirt_tiles_v1_10: -1845606368
       dirt_tiles_v1_11: -746540331
       dirt_tiles_v1_12: -1326770462
-      dirt_tiles_v1_13: 1428525272
-      dirt_tiles_v1_14: -928579789
-      dirt_tiles_v1_15: -251516773
-      dirt_tiles_v1_16: 686405938
-      dirt_tiles_v1_17: 1528559330
-      dirt_tiles_v1_18: 1507065701
-      dirt_tiles_v1_19: -2025493742
-      dirt_tiles_v1_2: -1695372380
-      dirt_tiles_v1_20: 1321371411
-      dirt_tiles_v1_21: -1944184027
-      dirt_tiles_v1_22: 1353547984
-      dirt_tiles_v1_23: 1213354759
-      dirt_tiles_v1_24: -133310648
-      dirt_tiles_v1_25: 1273481780
-      dirt_tiles_v1_26: 2100104248
-      dirt_tiles_v1_27: -760165509
-      dirt_tiles_v1_28: -11296063
-      dirt_tiles_v1_29: 1677744581
-      dirt_tiles_v1_3: 587416049
-      dirt_tiles_v1_30: 1411053166
-      dirt_tiles_v1_31: -764235635
-      dirt_tiles_v1_32: 914530938
-      dirt_tiles_v1_33: 41528267
-      dirt_tiles_v1_34: -1849557380
-      dirt_tiles_v1_35: -1805668176
-      dirt_tiles_v1_36: 1863439969
-      dirt_tiles_v1_37: 974493846
-      dirt_tiles_v1_38: -850379303
-      dirt_tiles_v1_39: -1895120859
-      dirt_tiles_v1_4: -1970151871
-      dirt_tiles_v1_40: 1948638524
-      dirt_tiles_v1_41: 1995625215
-      dirt_tiles_v1_42: 1499118511
-      dirt_tiles_v1_43: 644550924
-      dirt_tiles_v1_44: -150732879
-      dirt_tiles_v1_45: 1878824089
-      dirt_tiles_v1_46: -95189534
       dirt_tiles_v1_47: 1216477791
-      dirt_tiles_v1_5: -1187470331
+      dirt_tiles_v1_10: -1845606368
       dirt_tiles_v1_6: -1048880301
-      dirt_tiles_v1_7: 370730572
+      dirt_tiles_v1_33: 41528267
+      dirt_tiles_v1_5: -1187470331
+      dirt_tiles_v1_41: 1995625215
+      dirt_tiles_v1_19: -2025493742
+      dirt_tiles_v1_25: 1273481780
+      dirt_tiles_v1_0: -1958977238
+      dirt_tiles_v1_45: 1878824089
+      dirt_tiles_v1_31: -764235635
       dirt_tiles_v1_8: -128018599
+      dirt_tiles_v1_38: -850379303
+      dirt_tiles_v1_36: 1863439969
+      dirt_tiles_v1_42: 1499118511
+      dirt_tiles_v1_13: 1428525272
+      dirt_tiles_v1_24: -133310648
+      dirt_tiles_v1_16: 686405938
+      dirt_tiles_v1_18: 1507065701
+      dirt_tiles_v1_4: -1970151871
       dirt_tiles_v1_9: -645979564
-  mipmapLimitGroupName: 
+      dirt_tiles_v1_26: 2100104248
+      dirt_tiles_v1_43: 644550924
+      dirt_tiles_v1_40: 1948638524
+      dirt_tiles_v1_15: -251516773
+      dirt_tiles_v1_28: -11296063
+      dirt_tiles_v1_21: -1944184027
+      dirt_tiles_v1_1: 1512497509
+      dirt_tiles_v1_30: 1411053166
+      dirt_tiles_v1_2: -1695372380
+      dirt_tiles_v1_23: 1213354759
+      dirt_tiles_v1_32: 914530938
+      dirt_tiles_v1_39: -1895120859
+      dirt_tiles_v1_35: -1805668176
+      dirt_tiles_v1_14: -928579789
+      dirt_tiles_v1_44: -150732879
+      dirt_tiles_v1_3: 587416049
+      dirt_tiles_v1_22: 1353547984
+      dirt_tiles_v1_17: 1528559330
+      dirt_tiles_v1_34: -1849557380
+      dirt_tiles_v1_29: 1677744581
+      dirt_tiles_v1_27: -760165509
+      dirt_tiles_v1_7: 370730572
+      dirt_tiles_v1_20: 1321371411
+      dirt_tiles_v1_46: -95189534
+      dirt_tiles_v1_37: 974493846
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

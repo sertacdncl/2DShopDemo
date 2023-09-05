@@ -3,7 +3,7 @@ guid: d7bb24a921f7fab419fae9b17e4d7d70
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,12 +20,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -64,8 +63,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -77,7 +74,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -90,7 +86,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -103,7 +98,18 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1132,56 +1138,57 @@ TextureImporter:
     - texture: {fileID: 2800000, guid: 41e115541a025064abb21550032938c8, type: 3}
       name: _MaskTex
     nameFileIdTable:
-      grass_darker_tiles_0: -1924411562
-      grass_darker_tiles_1: 118930703
-      grass_darker_tiles_10: -293082557
-      grass_darker_tiles_11: -1218207581
-      grass_darker_tiles_12: -279744773
-      grass_darker_tiles_13: -41307811
-      grass_darker_tiles_14: 559750199
-      grass_darker_tiles_15: -2031525047
-      grass_darker_tiles_16: 1859099320
-      grass_darker_tiles_17: -733777179
-      grass_darker_tiles_18: -1885633913
-      grass_darker_tiles_19: -1570557766
-      grass_darker_tiles_2: -1166008634
-      grass_darker_tiles_20: -1042459276
-      grass_darker_tiles_21: -1567214433
-      grass_darker_tiles_22: 1268484555
-      grass_darker_tiles_23: 733979693
-      grass_darker_tiles_24: 227926712
-      grass_darker_tiles_25: -1916535270
-      grass_darker_tiles_26: -549650989
-      grass_darker_tiles_27: 1876181791
-      grass_darker_tiles_28: 121631427
-      grass_darker_tiles_29: 640394062
-      grass_darker_tiles_3: -1159688421
-      grass_darker_tiles_30: -796017333
-      grass_darker_tiles_31: -342504635
-      grass_darker_tiles_32: 1090963948
-      grass_darker_tiles_33: 537735974
-      grass_darker_tiles_34: -1887215028
-      grass_darker_tiles_35: 1468863156
-      grass_darker_tiles_36: -1984709632
-      grass_darker_tiles_37: -1235556138
       grass_darker_tiles_38: -386478433
-      grass_darker_tiles_39: -767226339
-      grass_darker_tiles_4: -1100216802
-      grass_darker_tiles_40: 1101232204
-      grass_darker_tiles_41: 1148454714
-      grass_darker_tiles_42: 259736006
       grass_darker_tiles_43: 1728077813
-      grass_darker_tiles_44: -1327884246
-      grass_darker_tiles_45: 2096459791
+      grass_darker_tiles_41: 1148454714
+      grass_darker_tiles_16: 1859099320
+      grass_darker_tiles_13: -41307811
+      grass_darker_tiles_32: 1090963948
       grass_darker_tiles_46: -563728003
-      grass_darker_tiles_47: 932433091
-      grass_darker_tiles_5: -819934905
-      grass_darker_tiles_6: 97451622
-      grass_darker_tiles_7: -688393687
-      grass_darker_tiles_8: -409105828
+      grass_darker_tiles_25: -1916535270
+      grass_darker_tiles_36: -1984709632
+      grass_darker_tiles_22: 1268484555
       grass_darker_tiles_9: -1254415180
-  mipmapLimitGroupName: 
+      grass_darker_tiles_30: -796017333
+      grass_darker_tiles_39: -767226339
+      grass_darker_tiles_5: -819934905
+      grass_darker_tiles_35: 1468863156
+      grass_darker_tiles_17: -733777179
+      grass_darker_tiles_19: -1570557766
+      grass_darker_tiles_42: 259736006
+      grass_darker_tiles_2: -1166008634
+      grass_darker_tiles_24: 227926712
+      grass_darker_tiles_20: -1042459276
+      grass_darker_tiles_26: -549650989
+      grass_darker_tiles_45: 2096459791
+      grass_darker_tiles_37: -1235556138
+      grass_darker_tiles_1: 118930703
+      grass_darker_tiles_21: -1567214433
+      grass_darker_tiles_34: -1887215028
+      grass_darker_tiles_29: 640394062
+      grass_darker_tiles_40: 1101232204
+      grass_darker_tiles_23: 733979693
+      grass_darker_tiles_47: 932433091
+      grass_darker_tiles_15: -2031525047
+      grass_darker_tiles_31: -342504635
+      grass_darker_tiles_10: -293082557
+      grass_darker_tiles_6: 97451622
+      grass_darker_tiles_28: 121631427
+      grass_darker_tiles_7: -688393687
+      grass_darker_tiles_4: -1100216802
+      grass_darker_tiles_3: -1159688421
+      grass_darker_tiles_27: 1876181791
+      grass_darker_tiles_18: -1885633913
+      grass_darker_tiles_12: -279744773
+      grass_darker_tiles_8: -409105828
+      grass_darker_tiles_14: 559750199
+      grass_darker_tiles_44: -1327884246
+      grass_darker_tiles_0: -1924411562
+      grass_darker_tiles_11: -1218207581
+      grass_darker_tiles_33: 537735974
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
