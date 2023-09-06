@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e321d8981bf14fb78498f6f4010c9, type: 3}
+  m_Name: ChestDefault
+  m_EditorClassIdentifier: 
+  itemName: Chest White
+  itemSprite: {fileID: 6552908516719514496, guid: 9ba7ae11f0d6fa14e953a6a9f622c449, type: 3}
+  itemType: 0
+  spriteLibraryAsset: {fileID: 7108339969198208228, guid: f847e526bd7f42847b787232229d112e, type: 3}
