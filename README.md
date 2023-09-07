@@ -14,3 +14,7 @@ Technologies:
 • DoTween (3rd Party Plugin)
 • Happy Harvest (3rd Party)
 • MyHelperPack (Belongs To Me)
+
+
+https://github.com/sertacdncl/2DShopDemo/assets/20639384/aa70f8a9-4981-4d5f-bf21-a37f3e6109f3
+
