@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93e321d8981bf14fb78498f6f4010c9, type: 3}
+  m_Name: 1_ChestOrange
+  m_EditorClassIdentifier: 
+  itemID: 1
+  itemName: Chest Orange
+  itemSprite: {fileID: -8114400824191217985, guid: 70156d8d6d790eb4b98909dee8592702, type: 3}
+  itemType: 0
+  spriteLibraryAsset: {fileID: 7108339969198208228, guid: fc97d24969dabd74cb4fc74ce2c11d37, type: 3}
