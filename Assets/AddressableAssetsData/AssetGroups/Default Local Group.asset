@@ -21,6 +21,10 @@ MonoBehaviour:
     m_Address: Assets/_Game/Prefabs/UI/Inventory/AddressableAsset/ItemSlot.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1d42e791192d60340a51af79959e9767
+    m_Address: Assets/_Game/Prefabs/UI/Inventory/AddressableAsset/ShopItemSlot Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 45eacda33dc382c45998a0d926f5eda7, type: 2}
   m_SchemaSet:

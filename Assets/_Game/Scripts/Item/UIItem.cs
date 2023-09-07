@@ -41,7 +41,6 @@ public class UIItem : MonoBehaviour
 			return;
 		GlobalUIItemEvents.IsDragging = true;
 		GlobalUIItemEvents.UIItem = this;
-		Debug.Log($"UI Item Setted with ID: {itemData.itemID}");
 		_itemImage.raycastTarget = false;
 		_canvas.overrideSorting = true;
 		
@@ -61,11 +60,15 @@ public class UIItem : MonoBehaviour
 		{
 			if (GlobalUIItemEvents.UIItem.itemData.itemID != GlobalUIItemEvents.CharacterSlot.item.ItemData.itemID)
 			{
-				var tempData = itemData;
-				PlayerVisualManager.Instance.EquipItem(tempData.itemID, GlobalUIItemEvents.CharacterSlot.slotType);
-				GlobalUIItemEvents.CharacterSlot.UpdateSlotData();
-				PlayerInventory.Instance.RemoveItem(itemData);
-				PlayerInventory.Instance.AddItem(GlobalUIItemEvents.CharacterSlot.item.ItemData);
+				if (IsItemSuitableToSlot(itemData.itemType, GlobalUIItemEvents.CharacterSlot.slotType))
+				{
+					var newEquipTempData = itemData;
+					var equippedItemTempData = GlobalUIItemEvents.CharacterSlot.item.ItemData;
+					PlayerVisualManager.Instance.EquipItem(newEquipTempData.itemID, GlobalUIItemEvents.CharacterSlot.slotType);
+					GlobalUIItemEvents.CharacterSlot.UpdateSlotData();
+					PlayerInventory.Instance.RemoveItem(itemData);
+					PlayerInventory.Instance.AddItem(equippedItemTempData);
+				}
 			}
 		}
 		_rectTransform.anchoredPosition = _basePosition;
@@ -79,5 +82,16 @@ public class UIItem : MonoBehaviour
 		itemData = null;
 		_itemImage.enabled = false;
 		_itemImage.sprite = null;
+	}
+
+	private bool IsItemSuitableToSlot(ItemType itemType, CharacterSlotType slotType)
+	{
+		return slotType switch
+		{
+			CharacterSlotType.Chest => itemType == ItemType.Body,
+			CharacterSlotType.Leg => itemType == ItemType.Leg,
+			CharacterSlotType.Foot => itemType == ItemType.Foot,
+			_ => false
+		};
 	}
 }

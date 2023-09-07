@@ -21,8 +21,11 @@ public class ItemSlotManager : MonoBehaviour
 
 	private void OnDisable()
 	{
-		PlayerInventory.Instance.OnItemAdded -= OnItemAdded;
-		PlayerInventory.Instance.OnItemRemoved -= OnItemRemoved;
+		var playerInventory = PlayerInventory.Instance;
+		if (ReferenceEquals(playerInventory,null))
+			return;
+		playerInventory.OnItemAdded -= OnItemAdded;
+		playerInventory.OnItemRemoved -= OnItemRemoved;
 	}
 
 	private void OnItemAdded(ItemObject itemData)

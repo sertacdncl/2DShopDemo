@@ -1,13 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SoundManager : Singleton<SoundManager>
 {
 	[SerializeField] private AudioSource sfxReferenceSource;
 	private Queue<AudioSource> _sfxPool;
+
+	[SerializeField] private AudioClip buySellSound;
 
 	private void Awake()
 	{
@@ -40,5 +39,19 @@ public class SoundManager : Singleton<SoundManager>
 		source.Play();
         
 		_sfxPool.Enqueue(source);
+	}
+
+	public void PlaySfxAtOnce(AudioClip clip)
+	{
+		var source = _sfxPool.Dequeue();
+		source.clip = clip;
+		source.spatialBlend = 0.0f;
+		source.Play();
+		_sfxPool.Enqueue(source);
+	}
+
+	public void PlayBuySellSound()
+	{
+		PlaySfxAtOnce(buySellSound);
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,7 +21,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
 	{
 		var idList = new List<int>();
 		items.ForEach(x=>idList.Add(x.itemID));
-		var inventoryData = JsonUtility.ToJson(idList);
+		var inventoryData = JsonConvert.SerializeObject(idList);
 		PlayerPrefs.SetString(PlayerInventoryDataKey, inventoryData);
 		PlayerPrefs.Save();
 	}
@@ -30,7 +31,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
 		if (!PlayerPrefs.HasKey(PlayerInventoryDataKey))
 			return;
 		var dataJsonString = PlayerPrefs.GetString(PlayerInventoryDataKey);
-		var inventoryItemIdList = JsonUtility.FromJson<List<int>>(dataJsonString);
+		var inventoryItemIdList = JsonConvert.DeserializeObject<List<int>>(dataJsonString);
 		foreach (var id in inventoryItemIdList)
 		{
 			var itemData = ItemManager.Instance.GetItemDataFromId(id);
@@ -50,5 +51,10 @@ public class PlayerInventory : Singleton<PlayerInventory>
 		items.Remove(itemData);
 		OnItemRemoved?.Invoke(itemData);
 		SavePlayerInventory();
+	}
+
+	public bool HasItem(ItemObject itemData)
+	{
+		return items.Contains(itemData);
 	}
 }

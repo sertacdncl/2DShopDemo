@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,8 +9,9 @@ public class PlayerController : MonoBehaviour
 	
 	private Rigidbody2D _rb;
 	private Vector2 _movement;
-	
 	private Vector2 _currentLookDirection;
+	
+	private bool _isInNPCRange;
 	
 	private readonly int _dirXHash = Animator.StringToHash("DirX");
 	private readonly int _dirYHash = Animator.StringToHash("DirY");
@@ -25,8 +27,16 @@ public class PlayerController : MonoBehaviour
 	{
 		_movement.x = Input.GetAxisRaw("Horizontal");
 		_movement.y = Input.GetAxisRaw("Vertical");
+
+		if (Input.GetKeyDown(KeyCode.E) && _isInNPCRange)
+		{
+			ShopPanelManager.Instance.Show(true);
+		}
 		
 		
+		//Cheat
+		if(Input.GetKeyDown(KeyCode.H))
+			PlayerCurrencyService.AddMoney(10);
 	}
 
 	void FixedUpdate()
@@ -54,6 +64,21 @@ public class PlayerController : MonoBehaviour
 		else
 		{
 			_currentLookDirection = direction.y > 0 ? Vector2.up : Vector2.down;
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.CompareTag("StoreNPC"))
+		{
+			_isInNPCRange = true;
+		}
+	}
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("StoreNPC"))
+		{
+			_isInNPCRange = false;
 		}
 	}
 }
