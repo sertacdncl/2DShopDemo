@@ -8,6 +8,8 @@ public class InventoryPanelManager : Singleton<InventoryPanelManager>
 	[SerializeField] private PlayerStatsLoader playerStatsLoader;
 	public Canvas panelCanvas;
 
+	public GameObject CharacterPortraitCam => characterPortraitCamera;
+	
 	private void Awake()
 	{
 		panelCanvas = GetComponent<Canvas>();

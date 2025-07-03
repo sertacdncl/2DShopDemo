@@ -16,9 +16,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 			{
 				if (_instance == null)
 				{
-					_instance = (T)FindObjectOfType(typeof(T));
+					_instance = (T)FindFirstObjectByType(typeof(T));
 
-					if (FindObjectsOfType(typeof(T)).Length > 1)
+					if (FindObjectsByType<T>(FindObjectsSortMode.None).Length > 1)
 					{
 						Debug.LogWarning("There is more than one manager of this type in this scene : " + typeof(T).Name);
 						return _instance;
