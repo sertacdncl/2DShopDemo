@@ -11,6 +11,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
 	public UnityAction<ItemObject> OnItemRemoved;
 
 	private readonly string PlayerInventoryDataKey = "PlayerInventoryData";
+	public bool IsLoaded { get; private set; }
 
 	private void Start()
 	{
@@ -37,6 +38,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
 			var itemData = ItemManager.Instance.GetItemDataFromId(id);
 			AddItem(itemData);
 		}
+		IsLoaded = true;
 	}
     
 	public void AddItem(ItemObject itemObject)
@@ -56,5 +58,10 @@ public class PlayerInventory : Singleton<PlayerInventory>
 	public bool HasItem(ItemObject itemData)
 	{
 		return items.Contains(itemData);
+	}
+	
+	public List<ItemObject> GetPlayerItems()
+	{
+		return items;
 	}
 }

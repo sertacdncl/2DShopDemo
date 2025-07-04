@@ -14,7 +14,16 @@ public class MainUI : MonoBehaviour
 	{
 		UIConfig.defaultFont = "Microsoft YaHei UI";
 		UIPackage.AddPackage("Inventory/Game");
+		
+		PlayerInventory.Instance.OnItemAdded += OnItemAddedInventory;
+		PlayerInventory.Instance.OnItemRemoved += OnItemRemovedInventory;
 	}
+
+	// private void OnDisable()
+	// {
+	// 	PlayerInventory.Instance.OnItemAdded -= OnItemAddedInventory;
+	// 	PlayerInventory.Instance.OnItemRemoved -= OnItemRemovedInventory;
+	// }
 
 	private void Start()
 	{
@@ -23,6 +32,16 @@ public class MainUI : MonoBehaviour
 		FillInventory();
 		LoadCharacterView();
 	}
+	
+	private void OnItemAddedInventory(ItemObject itemObject)
+	{
+		
+	}
+
+	private void OnItemRemovedInventory(ItemObject itemObject)
+	{
+		
+	}
 
 	private void LoadCharacterView()
 	{
@@ -30,31 +49,56 @@ public class MainUI : MonoBehaviour
 		InventoryPanelManager.Instance.CharacterPortraitCam.SetActive(true);
 		NTexture nTex = new NTexture(characterPortrait);
 		loader.texture = nTex;
-		loader.SetSize(characterPortrait.width, characterPortrait.height);
+		
 	}
 	
 	private void FillInventory()
 	{
 		GList iSlots = _inventoryView.GetChild("inventoryList").asList;
 		iSlots.RemoveChildrenToPool();
-
-		var itemSlotCount = 10;
+		
+		var items = PlayerInventory.Instance.GetPlayerItems();
+		var itemCount = items.Count;
+		var itemSlotCount = itemCount + (itemCount % 3 == 0 ? 9 : 6+itemCount%3); // Make sure we have even number of slots for the grid layout
+		
+		if (itemCount == 0)
+		{
+			itemSlotCount = 12;	
+		}
+		
 		for (int i = 0; i < itemSlotCount; i++)
 		{
-			GButton item = iSlots.AddItemFromPool().asButton;
-			item.draggable = true;
-			item.onDragStart.Add((EventContext context) =>
+			var slot = iSlots.AddItemFromPool();
+			slot.name = $"Slot_{i}";
+			
+			GButton slotBtn = slot.asButton;
+			GLoader loader = slotBtn.GetChild("icon").asLoader;
+			
+			loader.draggable = true;
+			loader.texture = null;
+			
+			if (i < itemCount)
 			{
-				//Cancel the original dragging, and start a new one with a agent.
-				context.PreventDefault();
-
-				DragDropManager.inst.StartDrag(item, item.icon, item.icon, (int)context.data);
-			});
-			// var icon = item.GetChild("icon");
-			// icon.draggable = true;
-			// var iconLoader = item.GetChild("icon").asLoader;
-			
-			
+				var itemData = items[i];
+				var nTex = new NTexture(itemData.itemSprite);
+				
+				loader.texture = nTex;
+				loader.onDragStart.Add((EventContext context) =>
+				{
+					context.PreventDefault();
+					var data = new DragDataDouble()
+					{
+						data = slotBtn,
+						data2 = itemData // You can set a second data if needed
+					};
+					DragDropManager.inst.StartDrag(slotBtn, null, data);
+					
+					var agent = DragDropManager.inst.dragAgent;
+					agent.texture = loader.texture;
+					agent.fill = FillType.Scale; //To make sure the icon is scaled properly
+					agent.SetSize(loader.width, loader.height);
+				});
+			}
 		}
 	}
 }
