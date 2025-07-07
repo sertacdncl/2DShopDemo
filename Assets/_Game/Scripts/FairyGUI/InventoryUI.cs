@@ -5,13 +5,14 @@ using UnityEngine;
 [Serializable]
 public class InventoryUI
 {
+	private GComponent _view;
 	private GList _inventoryList;
+	private GList _equippedList;
 
 	public InventoryUI()
 	{
 		
 	}
-	
 	
 	private void OnItemAddedInventory(ItemObject itemObject)
 	{
@@ -23,8 +24,11 @@ public class InventoryUI
 
 	public void Initialize(GComponent inventoryView)
 	{
+		_view = inventoryView;
 		_inventoryList = inventoryView.GetChild("inventoryList").asList;
-		LoadCharacterView(inventoryView);
+		_equippedList = inventoryView.GetChild("gearsList").asList;
+		LoadCharacterView();
+		LoadEquippedItems();
 		CreateInventory();
 		FillInventory();
 		
@@ -40,13 +44,38 @@ public class InventoryUI
 		}
 	}
 	
-	private void LoadCharacterView(GComponent inventoryView)
+	private void LoadCharacterView()
 	{
-		GLoader loader = inventoryView.GetChild("characterView").asLoader;
+		GLoader loader = _view.GetChild("characterView").asLoader;
 		InventoryPanelManager.Instance.CharacterPortraitCam.SetActive(true);
 		var characterPortrait = InventoryPanelManager.Instance.CharacterPortraitRenderTex;
 		NTexture nTex = new NTexture(characterPortrait);
 		loader.texture = nTex;
+	}
+
+	private void LoadEquippedItems()
+	{
+		// Clear the equipped list to start fresh
+		_equippedList.RemoveChildrenToPool();
+
+		//Get the equipped items from the player inventory
+		var chestSlot = _equippedList.AddItemFromPool();
+		chestSlot.asButton.title = "Chest";
+		var legSlot = _equippedList.AddItemFromPool();
+		legSlot.asButton.title = "Leg";
+		var footSlot = _equippedList.AddItemFromPool();
+		footSlot.asButton.title = "Foot";
+		
+		var chestItemData = PlayerVisualManager.Instance.GetEquippedItemData(CharacterSlotType.Chest);
+		var legItemData = PlayerVisualManager.Instance.GetEquippedItemData(CharacterSlotType.Leg);
+		var footItemData = PlayerVisualManager.Instance.GetEquippedItemData(CharacterSlotType.Foot);
+		
+		CreateItemToSlot(chestSlot, chestItemData);
+		CreateItemToSlot(legSlot, legItemData);
+		CreateItemToSlot(footSlot, footItemData);
+		SetGearSlotDropable(chestSlot);
+		SetGearSlotDropable(legSlot);
+		SetGearSlotDropable(footSlot);
 	}
 	
 	private void CreateInventory()
@@ -153,6 +182,7 @@ public class InventoryUI
 			{
 				if (!ReferenceEquals(slot.data, null))
 				{
+					
 					SwitchSlots(oldSlot, slot);
 					return;
 				}
@@ -161,6 +191,28 @@ public class InventoryUI
 				CreateItemToSlot(slot, draggedItem);
 				SetSlotDragable(slot, draggedItem);
 				ClearSlot(oldSlot);
+			}
+		});
+	}
+	
+	private void SetGearSlotDropable(GObject slot)
+	{
+		var slotBtn = slot.asButton;
+		slotBtn.onDrop.Add((EventContext context) =>
+		{
+			var dragData = (DragDataDouble)context.data;
+			if (dragData is { data: GObject oldSlot, data2: ItemObject draggedItem })
+			{
+				//If the slot type is not compatible with the dragged item, do nothing
+				if (slot.name == "Chest" && draggedItem.itemType != ItemType.Body ||
+					slot.name == "Leg" && draggedItem.itemType != ItemType.Leg ||
+					slot.name == "Foot" && draggedItem.itemType != ItemType.Foot)
+				{
+					return;
+				}
+				
+				SwitchSlots(oldSlot, slot);
+				PlayerVisualManager.Instance.EquipItem(draggedItem.itemID, slot.name == "Chest" ? CharacterSlotType.Chest : slot.name == "Leg" ? CharacterSlotType.Leg : CharacterSlotType.Foot);
 			}
 		});
 	}

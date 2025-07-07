@@ -4,57 +4,87 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+	[SerializeField] private float moveSpeed = 5f;
 	[SerializeField] private Animator animator;
-	
+
 	private Rigidbody2D _rb;
 	private Vector2 _movement;
 	private Vector2 _currentLookDirection;
-	
+	private Vector2 _joystickInput;
+
+
 	private bool _isInNPCRange;
-	
+
 	private readonly int _dirXHash = Animator.StringToHash("DirX");
 	private readonly int _dirYHash = Animator.StringToHash("DirY");
 	private readonly int _speedHash = Animator.StringToHash("Speed");
-	
+
 	private void Start()
 	{
 		_rb = GetComponent<Rigidbody2D>();
 		_currentLookDirection = Vector2.right;
+
+		JoystickEvents.OnMove += OnJoystickMove;
+		JoystickEvents.OnEnd += OnJoystickEnd;
+	}
+
+
+	private void OnJoystickMove(Vector2 direction)
+	{
+		SetJoystickInput(direction);
+	}
+
+	private void OnJoystickEnd()
+	{
+		SetJoystickInput(Vector2.zero);
+	}
+
+
+	public void SetJoystickInput(Vector2 input)
+	{
+		_joystickInput = input;
 	}
 
 	private void Update()
 	{
-		_movement.x = Input.GetAxisRaw("Horizontal");
-		_movement.y = Input.GetAxisRaw("Vertical");
+		if (_joystickInput != Vector2.zero)
+		{
+			_movement = _joystickInput;
+		}
+		else
+		{
+			_movement.x = Input.GetAxisRaw("Horizontal");
+			_movement.y = Input.GetAxisRaw("Vertical");
+		}
 
 		if (Input.GetKeyDown(KeyCode.E) && _isInNPCRange)
 		{
 			ShopPanelManager.Instance.Show(true);
 		}
-		
-		
+
+
 		//Cheat
-		if(Input.GetKeyDown(KeyCode.H))
+		if (Input.GetKeyDown(KeyCode.H))
 			PlayerCurrencyService.AddMoney(10);
 	}
 
 	void FixedUpdate()
-    {
+	{
 		if (_movement != Vector2.zero)
 		{
 			SetLookDirectionFrom(_movement);
 		}
+
 		var movement = _movement * moveSpeed;
 		var speed = movement.sqrMagnitude;
-		
+
 		animator.SetFloat(_dirXHash, _currentLookDirection.x);
 		animator.SetFloat(_dirYHash, _currentLookDirection.y);
 		animator.SetFloat(_speedHash, speed);
-		
+
 		_rb.MovePosition(_rb.position + _movement * moveSpeed * Time.fixedDeltaTime);
-    }
-	
+	}
+
 	void SetLookDirectionFrom(Vector2 direction)
 	{
 		if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
@@ -74,6 +104,7 @@ public class PlayerController : MonoBehaviour
 			_isInNPCRange = true;
 		}
 	}
+
 	private void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.CompareTag("StoreNPC"))

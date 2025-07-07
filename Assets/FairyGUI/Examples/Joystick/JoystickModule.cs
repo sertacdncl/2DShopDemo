@@ -61,6 +61,9 @@ public class JoystickModule : EventDispatcher
             }
 
             Vector2 pt = GRoot.inst.GlobalToLocal(new Vector2(evt.x, evt.y));
+            
+            Debug.Log($"OnTouchBegin: touchId={touchId}, x={pt.x}, y={pt.y}");
+            
             float bx = pt.x;
             float by = pt.y;
             _button.selected = true;
@@ -81,6 +84,9 @@ public class JoystickModule : EventDispatcher
             _startStageY = by;
 
             _center.visible = true;
+            
+            Debug.Log($"Center position: x={_center.x}, y={_center.y}, width={_center.width}, height={_center.height}");
+            
             _center.SetXY(bx - _center.width / 2, by - _center.height / 2);
             _button.SetXY(bx - _button.width / 2, by - _button.height / 2);
 
@@ -120,7 +126,8 @@ public class JoystickModule : EventDispatcher
         InputEvent evt = (InputEvent)context.data;
         if (touchId != -1 && evt.touchId == touchId)
         {
-            Vector2 pt = GRoot.inst.GlobalToLocal(new Vector2(evt.x, evt.y));
+            // Vector2 pt = GRoot.inst.GlobalToLocal(new Vector2(evt.x, evt.y));
+            Vector2 pt = GRoot._inst.GlobalToLocal(new Vector2(evt.x, evt.y));
             float bx = pt.x;
             float by = pt.y;
             float moveX = bx - _lastStageX;
