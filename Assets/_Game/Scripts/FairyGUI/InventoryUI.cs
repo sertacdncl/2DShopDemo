@@ -9,16 +9,7 @@ public class InventoryUI
 
 	public InventoryUI()
 	{
-		//Subscribe to the PlayerInventory events
-		if (PlayerInventory.Instance != null)
-		{
-			PlayerInventory.Instance.OnItemAdded += OnItemAddedInventory;
-			PlayerInventory.Instance.OnItemRemoved += OnItemRemovedInventory;
-		}
-		else
-		{
-			Debug.LogWarning("PlayerInventory instance is null, events will not be subscribed.");
-		}
+		
 	}
 	
 	
@@ -36,15 +27,26 @@ public class InventoryUI
 		LoadCharacterView(inventoryView);
 		CreateInventory();
 		FillInventory();
+		
+		//Subscribe to the PlayerInventory events
+		if (PlayerInventory.Instance != null)
+		{
+			PlayerInventory.Instance.OnItemAdded += OnItemAddedInventory;
+			PlayerInventory.Instance.OnItemRemoved += OnItemRemovedInventory;
+		}
+		else
+		{
+			Debug.LogWarning("PlayerInventory instance is null, events will not be subscribed.");
+		}
 	}
 	
 	private void LoadCharacterView(GComponent inventoryView)
 	{
 		GLoader loader = inventoryView.GetChild("characterView").asLoader;
 		InventoryPanelManager.Instance.CharacterPortraitCam.SetActive(true);
-		//TODO: InventoryPanelManager.Instance.CharacterPortrait use it 
-		// NTexture nTex = new NTexture(characterPortrait);
-		// loader.texture = nTex;
+		var characterPortrait = InventoryPanelManager.Instance.CharacterPortraitRenderTex;
+		NTexture nTex = new NTexture(characterPortrait);
+		loader.texture = nTex;
 	}
 	
 	private void CreateInventory()
@@ -101,9 +103,9 @@ public class InventoryUI
 
 	private void CreateItemToSlot(GObject slot, ItemObject itemData)
 	{
-		slot.data = itemData; // Store the item data in the loader for later use
 		var loader = slot.GetLoader();
 		loader.texture = itemData.itemSprite.GetNTexture();
+		loader.data = itemData; // Store the item data in the loader for later use
 		var data = new DragDataDouble()
 		{
 			data = slot,
@@ -149,10 +151,32 @@ public class InventoryUI
 			var dragData = (DragDataDouble)context.data;
 			if (dragData is { data: GObject oldSlot, data2: ItemObject draggedItem })
 			{
+				if (!ReferenceEquals(slot.data, null))
+				{
+					SwitchSlots(oldSlot, slot);
+					return;
+				}
+				
+				
 				CreateItemToSlot(slot, draggedItem);
 				SetSlotDragable(slot, draggedItem);
 				ClearSlot(oldSlot);
 			}
 		});
+	}
+	
+	private void SwitchSlots(GObject slot1, GObject slot2)
+	{
+		var itemData1 = (ItemObject)slot1.GetLoader().data;
+		var itemData2 = (ItemObject)slot2.GetLoader().data;
+
+		ClearSlot(slot1);
+		ClearSlot(slot2);
+
+		CreateItemToSlot(slot1, itemData2);
+		CreateItemToSlot(slot2, itemData1);
+
+		SetSlotDragable(slot1, itemData2);
+		SetSlotDragable(slot2, itemData1);
 	}
 }

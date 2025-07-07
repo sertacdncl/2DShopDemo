@@ -5,11 +5,13 @@ using UnityEngine;
 public class InventoryPanelManager : Singleton<InventoryPanelManager>
 {
 	[SerializeField] private GameObject characterPortraitCamera;
+	[SerializeField] private RenderTexture characterPortraitRenderTex;
 	[SerializeField] private PlayerStatsLoader playerStatsLoader;
 	public Canvas panelCanvas;
 
 	public GameObject CharacterPortraitCam => characterPortraitCamera;
-	
+	public RenderTexture CharacterPortraitRenderTex => characterPortraitRenderTex;
+
 	private void Awake()
 	{
 		panelCanvas = GetComponent<Canvas>();
@@ -19,7 +21,7 @@ public class InventoryPanelManager : Singleton<InventoryPanelManager>
 	{
 		characterPortraitCamera.SetActive(active);
 		panelCanvas.enabled = active;
-		if(active)
+		if (active)
 			playerStatsLoader.LoadPlayerMoney();
 	}
 
