@@ -1,8 +1,10 @@
 fileFormatVersion: 2
 guid: 8771a42e51c869743bd8cbf0511b8afd
-timeCreated: 1489371350
-licenseType: Pro
-DefaultImporter:
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: lua
+  assetBundleVariant: txt
+  script: {fileID: 11500000, guid: 1d9560eaee2419c46aa459171ae9579d, type: 3}
