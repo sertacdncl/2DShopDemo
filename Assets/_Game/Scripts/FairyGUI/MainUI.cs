@@ -17,7 +17,6 @@ public class MainUI : MonoBehaviour
 	private void Awake()
 	{
 		UIConfig.defaultFont = "Microsoft YaHei UI";
-		UIPackage.AddPackage("Inventory/Game");
 	}
 
 	private void Start()

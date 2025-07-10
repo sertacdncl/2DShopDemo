@@ -23,6 +23,6 @@ public class LuaEntry : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		luaEnv.Dispose();
+		luaEnv?.Dispose();
 	}
 }
