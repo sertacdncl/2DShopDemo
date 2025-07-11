@@ -16,13 +16,15 @@ public class LuaEntry : MonoBehaviour
 		GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchHeight);
 		
 		yield return null;
-		luaEnv = new LuaEnv();
+		luaEnv = LuaManager.LuaEnv;
+		
+		
 		var luaScript = Resources.Load<TextAsset>("Lua/main");
 		luaEnv.DoString(luaScript.text, "main");
 	}
 
 	private void OnDestroy()
 	{
-		luaEnv?.Dispose();
+		LuaManager.Dispose();
 	}
 }

@@ -143,5 +143,21 @@ function JoystickModule:OnTouchEnd(context)
     end)
 end
 
+function JoystickModule:Dispose()
+    if self._tweener then
+        self._tweener:Kill()
+        self._tweener = nil
+    end
+
+    if self._touchArea.onTouchBegin.Clear then
+        self._touchArea.onTouchBegin:Clear()
+        self._touchArea.onTouchMove:Clear()
+        self._touchArea.onTouchEnd:Clear()
+    end
+
+    self.touchId = -1
+    self._view = nil
+end
+
 
 return JoystickModule

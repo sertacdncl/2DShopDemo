@@ -26,15 +26,23 @@ local JoystickModule = load(CS.UnityEngine.Resources.Load("lua/JoystickModule"):
 
 --local JoystickModule = require 'lua.JoystickModule'
 
-local joystick = JoystickModule.new(view)
+joystick = JoystickModule.new(view)
 local JoystickEvents = CS.JoystickEvents
 
 table.insert(joystick.onMove, function(x, y, degree)
     local dir = UnityEngine.Vector2(x, y).normalized
     JoystickEvents.OnMove(dir)
-    print(string.format("degree: %.2f → x: %.2f, y: %.2f", degree, x, y))
 end)
 
 table.insert(joystick.onEnd, function()
     JoystickEvents.OnEnd()
 end)
+
+local CheatCommands = CS.CheatCommands
+
+if UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.H) then
+    CheatCommands.AddMoney(50)
+end
+
+local LuaBridge = CS.LuaBridge
+LuaBridge.PrintHello()

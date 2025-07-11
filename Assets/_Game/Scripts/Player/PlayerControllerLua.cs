@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using XLua;
 
 [CSharpCallLua]
 public delegate void LuaPlayerUpdate(float deltaTime, Vector2 joystickInput);
+
+
 
 public class PlayerControllerLua : MonoBehaviour
 {
@@ -10,22 +13,27 @@ public class PlayerControllerLua : MonoBehaviour
 
 	private LuaTable _playerLua;
 	private Vector2 _joystickInput;
+	
+	private Action<Vector2> _onMoveHandler;
+	private Action _onEndHandler;
 
 	private void Start()
 	{
-		LuaEnv luaenv = new LuaEnv();
+		LuaEnv luaEnv = LuaManager.LuaEnv;
 		var luaScript = Resources.Load<TextAsset>("Lua/player");
-		_playerLua = luaenv.DoString(luaScript.text, "player")[0] as LuaTable;
-		
-		if(_playerLua == null)
+		_playerLua = luaEnv.DoString(luaScript.text, "player")[0] as LuaTable;
+
+		if (_playerLua == null)
 		{
 			Debug.LogError("Failed to load Player Lua script.");
 			return;
 		}
-		
-		JoystickEvents.OnMove += dir => _joystickInput = dir;
-		JoystickEvents.OnEnd += () => _joystickInput = Vector2.zero;
-		
+
+		_onMoveHandler = dir => _joystickInput = dir;
+		_onEndHandler = () => _joystickInput = Vector2.zero;
+		JoystickEvents.OnMove += _onMoveHandler;
+		JoystickEvents.OnEnd += _onEndHandler;
+
 		_playerLua.Set("rb", GetComponent<Rigidbody2D>());
 		_playerLua.Set("position", (Vector2)transform.position);
 		_playerLua.Set("animator", animator);
@@ -34,5 +42,12 @@ public class PlayerControllerLua : MonoBehaviour
 	private void FixedUpdate()
 	{
 		_playerLua.Get<LuaPlayerUpdate>("update")?.Invoke(Time.deltaTime, _joystickInput);
+	}
+
+	private void OnDestroy()
+	{
+		_playerLua?.Dispose();
+		JoystickEvents.OnMove -= _onMoveHandler;
+		JoystickEvents.OnEnd -= _onEndHandler;
 	}
 }
